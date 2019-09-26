@@ -1,8 +1,8 @@
 from route_helper import simple_route
 
 GAME_HEADER = """
-<h1>Welcome to adventure quest!</h1>
-<p>At any time you can <a href='/reset/'>reset</a> your game.</p>
+<h1>Welcome to My Translator!</h1>
+
 """
 
 
@@ -14,10 +14,10 @@ def hello(world: dict) -> str:
     :param world: The current world
     :return: The HTML to show the player
     """
-    return GAME_HEADER+"""You are in the Lair of the Corgis.<br>
+    return GAME_HEADER+"""Welcome to my fun little game.<br>
     
-    <a href="goto/lair">Go further into the lair.</a><br>
-    <a href="goto/entrance">Retreat.</a>"""
+    <a href="/question1/">Click here to start.</a><br>
+    """
 
 
 ENCOUNTER_MONSTER = """
@@ -37,8 +37,8 @@ What is its name?
 """
 
 
-@simple_route('/goto/<where>/')
-def open_door(world: dict, where: str) -> str:
+@simple_route('/question1/')
+def ask_question() -> str:
     """
     Update the player location and encounter a monster, prompting the player
     to give them a name.
@@ -66,3 +66,8 @@ def save_name(world: dict, monsters_name: str) -> str:
     <br><br>
     <a href='/'>Return to the start</a>
     """.format(where=world['location'], monster_name=world['name'])
+
+@simple_route('/getname/')
+def get_name():
+    name = input()
+    print("Hello " + name)
